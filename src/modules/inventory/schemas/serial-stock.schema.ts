@@ -13,7 +13,7 @@ export class SerialStock extends Document {
   serial: string;
 
   @Prop({ default: 'AVAILABLE' })
-  status: string; // AVAILABLE | SOLD
+  status: string;
 
   @Prop()
   receiptId?: string;

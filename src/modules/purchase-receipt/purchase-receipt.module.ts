@@ -6,9 +6,11 @@ import {
 } from './schemas/purchase-receipt.schema';
 import { PurchaseReceiptController } from './purchase-receipt.controller';
 import { PurchaseReceiptService } from './purchase-receipt.service';
+import { InventoryModule } from '../inventory/inventory.module';
 
 @Module({
   imports: [
+    InventoryModule,
     MongooseModule.forFeature([
       { name: PurchaseReceipt.name, schema: PurchaseReceiptSchema },
     ]),

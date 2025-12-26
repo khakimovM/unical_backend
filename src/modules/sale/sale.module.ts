@@ -3,9 +3,11 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Sale, SaleSchema } from './schemas/sale.schema';
 import { SaleController } from './sale.controller';
 import { SaleService } from './sale.service';
+import { InventoryModule } from '../inventory/inventory.module';
 
 @Module({
   imports: [
+    InventoryModule,
     MongooseModule.forFeature([{ name: Sale.name, schema: SaleSchema }]),
   ],
   controllers: [SaleController],

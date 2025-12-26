@@ -1,34 +1,33 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { PurchaseReceiptService } from './purchase-receipt.service';
 import { CreatePurchaseReceiptDto } from './dto/create-purchase-receipt.dto';
-import { UpdatePurchaseReceiptDto } from './dto/update-purchase-receipt.dto';
 
-@Controller('purchase-receipt')
+@Controller('purchase-receipts')
 export class PurchaseReceiptController {
-  constructor(private readonly purchaseReceiptService: PurchaseReceiptService) {}
+  constructor(private readonly service: PurchaseReceiptService) {}
 
   @Post()
-  create(@Body() createPurchaseReceiptDto: CreatePurchaseReceiptDto) {
-    return this.purchaseReceiptService.create(createPurchaseReceiptDto);
+  create(@Body() dto: CreatePurchaseReceiptDto) {
+    return this.service.create(dto);
   }
 
-  @Get()
-  findAll() {
-    return this.purchaseReceiptService.findAll();
+  @Post(':id/confirm')
+  confirm(@Param('id') id: string) {
+    return this.service.confirm(id);
+  }
+
+  @Post(':id/cancel')
+  cancel(@Param('id') id: string, @Body() body: { reason: string }) {
+    return this.service.cancel(id, body.reason);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.purchaseReceiptService.findOne(+id);
+    return this.service.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePurchaseReceiptDto: UpdatePurchaseReceiptDto) {
-    return this.purchaseReceiptService.update(+id, updatePurchaseReceiptDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.purchaseReceiptService.remove(+id);
+  @Get()
+  findAll() {
+    return this.service.findAll();
   }
 }

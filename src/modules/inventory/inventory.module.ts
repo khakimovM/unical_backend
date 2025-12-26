@@ -11,9 +11,11 @@ import {
   ExpirableStockSchema,
 } from './schemas/expirable-stock.schema';
 import { InventoryService } from './inventory.service';
+import { ProductModule } from '../product/product.module';
 
 @Module({
   imports: [
+    ProductModule,
     MongooseModule.forFeature([
       { name: StockSummary.name, schema: StockSummarySchema },
       { name: SerialStock.name, schema: SerialStockSchema },
@@ -22,6 +24,6 @@ import { InventoryService } from './inventory.service';
     ]),
   ],
   providers: [InventoryService],
-  exports: [InventoryService], // Purchase va Sale service’lardan foydalanish uchun
+  exports: [InventoryService],
 })
 export class InventoryModule {}

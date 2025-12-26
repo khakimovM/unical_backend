@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { TrackingType } from '../../common/enums/tracking-type.enum';
+import { TrackingType } from 'src/common/enums/tracking-type.enum';
 
 @Schema({ timestamps: true })
 export class Product extends Document {
@@ -39,7 +39,7 @@ export class Product extends Document {
   variantAttributes?: Record<string, any>;
 
   @Prop()
-  parentId?: string; // variant bo‘lsa parent SKU yoki ID
+  parentId?: string;
 
   // Audit
   @Prop()
